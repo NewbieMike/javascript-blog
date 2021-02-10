@@ -1,12 +1,5 @@
 'use strict';
 
-/* document.getElementById('test-button').addEventListener('click', function(){
-    const links = document.querySelectorAll('.titles a');
-    console.log('links:', links);
-  }); */
-
-
-
 const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
@@ -43,8 +36,51 @@ const titleClickHandler = function(event){
     console.log(correctArticle);
   }
   
-const links = document.querySelectorAll('.titles a');
+
+
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles';
+
+function  generateTitleLinks(){
+    console.log('Generate links')
+
+    /* [DONE] remove contents of titleList */
+    const titleList = document.querySelector(optTitleListSelector);
+    console.log(titleList);
+    titleList.innerHTML='';
+
+    /* [DONE] for each article */
+    const articles = document.querySelectorAll(optArticleSelector);
+
+    
+    /* [DONE] get the article id */
+    
+    for (let article of articles){
+        const articleId=article.getAttribute('id');
+        console.log(articleId);
+        
+
+    
+    /* [DONE] find the title element */
+    /* [DONE] get the title from the title element */
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    console.log(articleTitle);
+    
+    /* [DONE] create HTML of the link */
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    console.log(linkHTML)
+
+    titleList.insertAdjacentHTML('beforeend', linkHTML)
+
+    /* insert link into titleList */
+    const links = document.querySelectorAll('.titles a');
+    console.log(links)
   
-for(let link of links){
+    for(let link of links){
     link.addEventListener('click', titleClickHandler);
-  }
+        }
+    }
+}
+
+generateTitleLinks();
